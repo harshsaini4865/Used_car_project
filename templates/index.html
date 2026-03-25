@@ -1,0 +1,3236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Used Cars - Quality Pre-Owned Vehicles</title>
+    <meta name="description" content="Find the best quality used cars at affordable prices. Wide selection of pre-owned vehicles with warranty and financing options.">
+    <meta name="keywords" content="used cars, pre-owned vehicles, car dealership, quality cars, affordable cars, certified cars">
+    <meta name="author" content="Premium Used Cars">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========== CSS VARIABLES & RESET ========== */
+        :root {
+            --primary-color: #e74c3c;
+            --secondary-color: #3498db;
+            --accent-color: #f39c12;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --text-color: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+            --border-radius: 10px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--white);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== LOADING SCREEN ========== */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--light-color);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ========== HEADER & NAVIGATION ========== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar {
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-logo h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            margin: 3px 0;
+            transition: var(--transition);
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+            
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+        }
+
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, var(--light-color) 0%, var(--white) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat p {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* ========== SEARCH SECTION ========== */
+        .search-section {
+            padding: 60px 0;
+            background: var(--light-color);
+        }
+
+        .search-section h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .search-section p {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .search-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-control {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+        }
+
+        /* ========== INVENTORY SECTION ========== */
+        .inventory {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .inventory-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .inventory-stats {
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .inventory-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .view-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .view-btn.active,
+        .view-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .inventory-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .car-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .car-card.list-view {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .car-card.list-view .car-image {
+            width: 300px;
+            height: 200px;
+        }
+
+        .car-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            z-index: 1;
+        }
+
+        .car-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .car-info {
+            padding: 1.5rem;
+        }
+
+        .car-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .car-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .car-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .car-detail i {
+            color: var(--primary-color);
+        }
+
+        .car-details-horizontal {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .car-details-horizontal span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .car-description {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .car-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: var(--light-color);
+            color: var(--text-color);
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .car-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+        }
+
+        .no-results i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* ========== PAGINATION ========== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .page-btn {
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .page-btn:hover,
+        .page-btn.active {
+            background: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ========== SERVICES SECTION ========== */
+        .services {
+            padding: 80px 0;
+            background: var(--light-color);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .about-features {
+            margin-bottom: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .feature-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* ========== TESTIMONIALS SECTION ========== */
+        .testimonials {
+            padding: 80px 0;
+            background: var(--light-color);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .testimonial-rating {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .testimonial-info h4 {
+            margin-bottom: 0.2rem;
+            color: var(--dark-color);
+        }
+
+        .testimonial-info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            width: 30px;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .contact-item p {
+            color: var(--text-light);
+            margin-bottom: 0.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--dark-color);
+            transform: translateY(-2px);
+        }
+
+        .contact-form {
+            background: var(--light-color);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--dark-color);
+            color: var(--white);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .footer-section p {
+            color: #bdc3c7;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: var(--border-radius);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* ========== BACK TO TOP ========== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: var(--dark-color);
+            transform: translateY(-3px);
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+
+            .inventory-controls {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .inventory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .car-card.list-view {
+                flex-direction: column;
+            }
+
+            .car-card.list-view .car-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+            }
+
+            .car-actions {
+                flex-direction: column;
+            }
+
+            .car-actions .btn {
+                width: 100%;
+            }
+
+            .pagination {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .page-btn {
+                min-width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --dark-color: #1a1a1a;
+                --light-color: #2a2a2a;
+                --text-color: #e0e0e0;
+                --text-light: #b0b0b0;
+                --white: #1a1a1a;
+                --shadow: 0 10px 30px rgba(0,0,0,0.5);
+            }
+
+            body {
+                background-color: var(--dark-color);
+            }
+
+            .car-card,
+            .service-card,
+            .contact-form,
+            .testimonial-card {
+                background-color: var(--light-color);
+            }
+
+            .header {
+                background-color: var(--dark-color);
+            }
+
+            .nav-menu {
+                background-color: var(--dark-color);
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .car-card:hover,
+            .service-card:hover {
+                transform: none !important;
+            }
+        }
+        /* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal {
+    background: white;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.7);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--dark-color);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+    color: var(--primary-color);
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.form-links {
+    text-align: center;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-links a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.form-links a:hover {
+    text-decoration: underline;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+/* User Menu Styles */
+.user-menu {
+    position: relative;
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.user-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-dropdown a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.user-dropdown a:hover {
+    background: #f8f9fa;
+    color: var(--primary-color);
+}
+
+.user-dropdown hr {
+    margin: 5px 0;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 99;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Save Car Button */
+.save-car {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.save-car:hover {
+    background: #f8f9fa;
+    transform: scale(1.1);
+}
+
+.save-car i {
+    color: #999;
+    transition: color 0.3s ease;
+}
+
+.save-car:hover i {
+    color: var(--primary-color);
+}
+
+.save-car i.fas {
+    color: var(--primary-color);
+}
+
+/* Error States */
+.form-control.error {
+    border-color: #dc3545;
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal {
+        width: 95%;
+        margin: 0 auto;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-spinner"></div>
+        <p>Loading Premium Used Cars...</p>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>Premium Used Cars</h2>
+                </div>
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#inventory" class="nav-link">Inventory</a></li>
+                    <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button id="loginBtn" class="btn btn-outline btn-small">Login</button>
+                    <button id="getQuoteBtn" class="btn btn-primary btn-small">Get Quote</button>
+                </div>
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Find Your Dream Car</h1>
+                    <p class="hero-description">Discover quality pre-owned vehicles at the best prices. All cars inspected and certified.</p>
+                    <div class="hero-buttons">
+                        <a href="#inventory" class="btn btn-primary">Browse Inventory</a>
+                        <a href="#contact" class="btn btn-secondary">Get Quote</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <h3>500+</h3>
+                            <p>Cars Sold</p>
+                        </div>
+                        <div class="stat">
+                            <h3>98%</h3>
+                            <p>Customer Satisfaction</p>
+                        </div>
+                        <div class="stat">
+                            <h3>10+</h3>
+                            <p>Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="{{ url_for('static', filename='hero2.webp') }}" alt="Hero Car Image" class="hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <h2>Find Your Perfect Car</h2>
+            <p>Use our advanced search to find the car that matches your needs</p>
+            <form class="search-form" id="searchForm">
+                <div class="form-group">
+                    <select id="make" name="make" class="form-control">
+                        <option value="">Select Make</option>
+                        <option value="toyota">Toyota</option>
+                        <option value="honda">Honda</option>
+                        <option value="bmw">BMW</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                        <option value="ford">Ford</option>
+                    </select>
+                </div>
+            
+                <div class="form-group">
+                    <select id="year" name="year" class="form-control">
+                        <option value="">Select Year</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="price" name="price" class="form-control">
+                        <option value="">Max Price</option>
+                        <option value="10000">₹10,000</option>
+                        <option value="25000">₹25,000</option>
+                        <option value="50000">₹50,000</option>
+                        <option value="100000">₹100,000</option>
+                        <option value="200000">₹200,000</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select id="fuel" name="fuel" class="form-control">
+                        <option value="">Fuel Type</option>
+                        <option value="petrol">Petrol</option>
+                        <option value="diesel">Diesel</option>
+                        <option value="hybrid">Hybrid</option>
+                    </select>
+                </div>
+                <center>
+                <div class="form-group button-group" style="margin-right: -320px; size: 50px;">
+                    <button type="submit" class="btn btn-primary" style="button-size: 500px;">Search Cars</button>
+                    <button type="button" id="clearFilters" class="btn btn-outline">Clear Filters</button>
+                </div>
+                </center>
+            </form>
+        </div>
+    </section>
+
+    <!-- Inventory Section -->
+    <section id="inventory" class="inventory">
+        <div class="container">
+            <h2 class="section-title">Our Inventory</h2>
+            <p class="section-subtitle">Discover our wide selection of quality pre-owned vehicles</p>
+            
+            <div class="inventory-controls">
+                <div class="inventory-stats">
+                    <span id="carCount">0</span> cars available
+                </div>
+                <div class="inventory-actions">
+                    <select id="sortBy" class="form-control">
+                        <option value="">Sort By</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="year-desc">Year: Newest First</option>
+                        <option value="year-asc">Year: Oldest First</option>
+                        <option value="mileage-asc">Mileage: Low to High</option>
+                    </select>
+                    <div class="view-controls">
+                        <img src="{{ url_for('static', filename='toyota camry.png') }}" alt="Grid View" class="view-icon">
+                        <button class="view-btn active" data-view="grid" title="Grid View">
+                            <i class="fas fa-th"></i>
+                        </button>
+                        <button class="view-btn" data-view="list" title="List View">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="inventory-grid" id="inventoryGrid">
+                <!-- Cars will be populated by JavaScript -->
+            </div>
+            
+            <div class="inventory-pagination" id="inventoryPagination">
+                <!-- Pagination will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Comprehensive services to make your car buying experience seamless</p>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Services will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Premium Used Cars</h2>
+                    <p>With over 10 years of experience in the automotive industry, we are your trusted partner for quality pre-owned vehicles. Our mission is to provide reliable, affordable cars with exceptional customer service.</p>
+                    <p>We carefully select each vehicle in our inventory, ensuring it meets our high standards for quality and reliability. Our team of certified technicians thoroughly inspects every car before it reaches our lot.</p>
+                    <div class="about-features">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>150-point inspection on every vehicle</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>6-month warranty included</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Flexible financing options</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Trade-in assistance</span>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="stat">
+                            <h3 id="carsSold">500</h3>
+                            <p>Cars Sold</p>
+                        </div>
+                        <div class="stat">
+                            <h3 id="satisfaction">98</h3>
+                            <p>Customer Satisfaction</p>
+                        </div>
+                        <div class="stat">
+                            <h3 id="experience">10</h3>
+                            <p>Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDUwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjVmNWY1Ii8+Cjx0ZXh0IHg9IjI1MCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgZmlsbD0iIzY2NiIgZm9udC1zaXplPSIxNiI+QWJvdXQgVXMgSW1hZ2U8L3RleHQ+Cjwvc3ZnPgo=" alt="About Premium Used Cars" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <p class="section-subtitle">Real experiences from satisfied customers</p>
+            <div class="testimonials-grid" id="testimonialsGrid">
+                <!-- Testimonials will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Us</h2>
+            <p class="section-subtitle">Get in touch with our team for any questions or assistance</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>123 Car Street, Auto City, AC 12345</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>📱 +91 9461474457</p>
+                            <p>📞 +91 9876543210</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>info@premiumusedcars.com</p>
+                            <p>sales@premiumusedcars.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Hours</h4>
+                            <p>Mon-Sat: 9AM-7PM</p>
+                            <p>Sun: 10AM-5PM</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Your Name *</label>
+                                <input type="text" id="name" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email *</label>
+                                <input type="email" id="email" name="email" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Your Phone</label>
+                                <input type="tel" id="phone" name="phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <select id="subject" name="subject" class="form-control" required>
+                                    <option value="">Select Subject</option>
+                                    <option value="inquiry">Car Inquiry</option>
+                                    <option value="test-drive">Test Drive</option>
+                                    <option value="financing">Financing</option>
+                                    <option value="trade-in">Trade-In</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message *</label>
+                            <textarea id="message" name="message" class="form-control" placeholder="Tell us about your requirements..." rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Premium Used Cars</h3>
+                    <p>Your trusted partner for quality pre-owned vehicles. We make car buying simple and stress-free with our comprehensive services and expert guidance.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#inventory">Inventory</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Car Sales</a></li>
+                        <li><a href="#">Financing</a></li>
+                        <li><a href="#">Trade-In</a></li>
+                        <li><a href="#">Warranty</a></li>
+                        <li><a href="#">Inspection</a></li>
+                        <li><a href="#">Test Drive</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get updates on new arrivals and special offers.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Your Email" required class="form-control">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Premium Used Cars. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Navigation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
+
+    // Login button functionality
+    const loginBtn = document.getElementById('loginBtn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', function() {
+            showLoginModal();
+        });
+    }
+
+    // Get Quote button functionality
+    const getQuoteBtn = document.getElementById('getQuoteBtn');
+    if (getQuoteBtn) {
+        getQuoteBtn.addEventListener('click', function() {
+            smoothScrollTo(document.getElementById('contact'));
+            // Pre-fill the subject field
+            const subjectField = document.getElementById('subject');
+            if (subjectField) {
+                subjectField.value = 'inquiry';
+            }
+        });
+    }
+
+    // Back to top button
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Smooth scrolling for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                smoothScrollTo(target);
+            }
+        });
+    });
+
+    // Counter animation
+    const counters = document.querySelectorAll('.stat h3');
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.textContent);
+                animateCounter(counter, target);
+                counterObserver.unobserve(counter);
+            }
+        });
+    });
+
+    counters.forEach(counter => {
+        counterObserver.observe(counter);
+    });
+});
+
+// Smooth scroll function
+function smoothScrollTo(element) {
+    const headerOffset = 80;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+    });
+}
+
+// Counter animation function
+function animateCounter(element, target) {
+    let current = 0;
+    const increment = target / 50;
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target + (element.id === 'satisfaction' ? '%' : '+');
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.ceil(current) + (element.id === 'satisfaction' ? '%' : '+');
+        }
+    }, 30);
+}
+
+// Login modal function
+function showLoginModal() {
+    // Create modal HTML
+    const modalHTML = `
+        <div class="modal-overlay" id="loginModalOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>Login to Premium Used Cars</h3>
+                    <button class="modal-close" id="closeModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginEmail">Email *</label>
+                            <input type="email" id="loginEmail" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password *</label>
+                            <input type="password" id="loginPassword" name="password" class="form-control" required>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="rememberMe" name="rememberMe">
+                            <label for="rememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        <div class="form-links">
+                            <a href="#" id="forgotPassword">Forgot Password?</a>
+                            <span>Don't have an account? <a href="#" id="showRegister">Register</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Remove existing modal if any
+    const existingModal = document.getElementById('loginModalOverlay');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Add modal to body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Get modal elements
+    const modal = document.getElementById('loginModalOverlay');
+    const loginForm = document.getElementById('loginForm');
+    const closeModal = document.getElementById('closeModal');
+    const forgotPassword = document.getElementById('forgotPassword');
+    const showRegister = document.getElementById('showRegister');
+
+    // Show modal
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+
+    // Close modal functions
+    function closeModalFunction() {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    }
+
+    // Event listeners
+    closeModal.addEventListener('click', closeModalFunction);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModalFunction();
+        }
+    });
+
+    // Login form submission
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        const rememberMe = document.getElementById('rememberMe').checked;
+
+        // Simple validation
+        if (!email || !password) {
+            alert('Please fill in all required fields');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+
+        // Simulate login process
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Logging in...';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+            // Simulate successful login
+            alert(`Welcome back! You are now logged in as ${email}`);
+            
+            // Save login state if remember me is checked
+            if (rememberMe) {
+                localStorage.setItem('userEmail', email);
+                localStorage.setItem('rememberMe', 'true');
+            } else {
+                localStorage.removeItem('userEmail');
+                localStorage.removeItem('rememberMe');
+            }
+
+            // Update UI
+            updateLoginUI(email);
+            
+            closeModalFunction();
+            
+            // Reset button
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }, 1500);
+    });
+
+    // Forgot password
+    forgotPassword.addEventListener('click', function(e) {
+        e.preventDefault();
+        alert('Password reset functionality would be implemented here. Please contact support.');
+    });
+
+    // Show register form
+    showRegister.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeModalFunction();
+        setTimeout(() => {
+            showRegisterModal();
+        }, 300);
+    });
+}
+
+// Register modal function
+function showRegisterModal() {
+    const modalHTML = `
+        <div class="modal-overlay" id="registerModalOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3>Register for Premium Used Cars</h3>
+                    <button class="modal-close" id="closeRegisterModal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail">Email *</label>
+                            <input type="email" id="registerEmail" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword">Password *</label>
+                            <input type="password" id="registerPassword" name="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password *</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="agreeTerms" name="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the <a href="#">Terms and Conditions</a></label>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        <div class="form-links">
+                            <span>Already have an account? <a href="#" id="showLogin">Login</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Remove existing modal if any
+    const existingModal = document.getElementById('registerModalOverlay');
+    if (existingModal) {
+        existingModal.remove();
+    }
+
+    // Add modal to body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Get modal elements
+    const modal = document.getElementById('registerModalOverlay');
+    const registerForm = document.getElementById('registerForm');
+    const closeModal = document.getElementById('closeRegisterModal');
+    const showLogin = document.getElementById('showLogin');
+
+    // Show modal
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+
+    // Close modal functions
+    function closeModalFunction() {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.remove();
+        }, 300);
+    }
+
+    // Event listeners
+    closeModal.addEventListener('click', closeModalFunction);
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModalFunction();
+        }
+    });
+
+    // Register form submission
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const agreeTerms = document.getElementById('agreeTerms').checked;
+
+        // Validation
+        if (!firstName || !lastName || !email || !password || !confirmPassword) {
+            alert('Please fill in all required fields');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            alert('Please enter a valid email address');
+            return;
+        }
+
+        if (password.length < 6) {
+            alert('Password must be at least 6 characters long');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        if (!agreeTerms) {
+            alert('You must agree to the terms and conditions');
+            return;
+        }
+
+        // Simulate registration process
+        const submitBtn = registerForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Registering...';
+        submitBtn.disabled = true;
+
+        setTimeout(() => {
+            // Simulate successful registration
+            alert(`Welcome ${firstName}! Your account has been created successfully.`);
+            
+            closeModalFunction();
+            
+            // Reset button
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+        }, 2000);
+    });
+
+    // Show login form
+    showLogin.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeModalFunction();
+        setTimeout(() => {
+            showLoginModal();
+        }, 300);
+    });
+}
+
+// Update login UI after successful login
+function updateLoginUI(email) {
+    const loginBtn = document.getElementById('loginBtn');
+    const navActions = document.querySelector('.nav-actions');
+    
+    if (loginBtn && navActions) {
+        // Replace login button with user menu
+        loginBtn.outerHTML = `
+            <div class="user-menu">
+                <button class="btn btn-outline btn-small" id="userMenuBtn">
+                    <i class="fas fa-user"></i> ${email.split('@')[0]}
+                </button>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="#" id="myAccount">My Account</a>
+                    <a href="#" id="myOrders">My Orders</a>
+                    <a href="#" id="savedCars">Saved Cars</a>
+                    <hr>
+                    <a href="#" id="logoutBtn">Logout</a>
+                </div>
+            </div>
+        `;
+
+        // Add event listeners for user menu
+        setTimeout(() => {
+            const userMenuBtn = document.getElementById('userMenuBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (userMenuBtn && userDropdown) {
+                userMenuBtn.addEventListener('click', function() {
+                    userDropdown.classList.toggle('active');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.user-menu')) {
+                        userDropdown.classList.remove('active');
+                    }
+                });
+
+                // Logout functionality
+                if (logoutBtn) {
+                    logoutBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        localStorage.removeItem('userEmail');
+                        localStorage.removeItem('rememberMe');
+                        location.reload();
+                    });
+                }
+
+                // Other user menu items
+                document.getElementById('myAccount')?.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('My Account page would open here');
+                });
+
+                document.getElementById('myOrders')?.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('My Orders page would open here');
+                });
+
+                document.getElementById('savedCars')?.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Saved Cars page would open here');
+                });
+            }
+        }, 100);
+    }
+}
+
+// Email validation function
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// Check for saved login state
+document.addEventListener('DOMContentLoaded', function() {
+    const savedEmail = localStorage.getItem('userEmail');
+    const rememberMe = localStorage.getItem('rememberMe');
+    
+    if (savedEmail && rememberMe === 'true') {
+        updateLoginUI(savedEmail);
+    }
+});
+       // Main JavaScript functionality
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing Premium Used Cars website...');
+    
+    // Hide loading screen
+    setTimeout(() => {
+        const loadingScreen = document.getElementById('loading-screen');
+        if (loadingScreen) {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 300);
+        }
+    }, 1000);
+
+    // Initialize all components
+    try {
+        initializeServices();
+        initializeInventory();
+        initializeInventorySearch();
+        initializeInventoryControls();
+        initializeFormValidation();
+        initializeTestimonials();
+        initializeCarInquiry();
+        initializeErrorHandling();
+        initializePerformanceTracking();
+        lazyLoadImages();
+        
+        console.log('Website initialized successfully!');
+    } catch (error) {
+        console.error('Error initializing website:', error);
+    }
+});
+
+// Initialize services display
+function initializeServices() {
+    const servicesGrid = document.getElementById('servicesGrid');
+    if (!servicesGrid) return;
+
+    const services = [
+        {
+            icon: 'fas fa-car',
+            title: 'Quality Cars',
+            description: '150-point inspection on every vehicle',
+            details: 'Each car undergoes rigorous testing to ensure quality and reliability'
+        },
+        {
+            icon: 'fas fa-shield-alt',
+            title: 'Warranty',
+            description: '6-month warranty included',
+            details: 'Comprehensive warranty coverage for your peace of mind'
+        },
+        {
+            icon: 'fas fa-handshake',
+            title: 'Financing',
+            description: 'Flexible financing options',
+            details: 'Multiple financing plans to suit your budget and needs'
+        },
+        {
+            icon: 'fas fa-exchange-alt',
+            title: 'Trade-In',
+            description: 'Get the best value for your car',
+            details: 'Hassle-free trade-in process with fair market valuation'
+        },
+        {
+            icon: 'fas fa-tools',
+            title: 'Maintenance',
+            description: 'Professional car servicing',
+            details: 'Expert maintenance and repair services for all makes and models'
+        },
+        {
+            icon: 'fas fa-headset',
+            title: '24/7 Support',
+            description: 'Round-the-clock assistance',
+            details: 'Dedicated customer support team available anytime'
+        }
+    ];
+
+    services.forEach(service => {
+        const serviceCard = createServiceCard(service);
+        servicesGrid.appendChild(serviceCard);
+    });
+}
+
+// Create service card
+function createServiceCard(service) {
+    const card = document.createElement('div');
+    card.className = 'service-card';
+    card.innerHTML = `
+        <div class="service-icon">
+            <i class="${service.icon}"></i>
+        </div>
+        <h3>${service.title}</h3>
+        <p>${service.description}</p>
+        <div class="service-details">
+            <p>${service.details}</p>
+        </div>
+    `;
+    return card;
+}
+
+// Initialize inventory
+function initializeInventory() {
+    const inventoryGrid = document.getElementById('inventoryGrid');
+    const carCountElement = document.getElementById('carCount');
+    
+    if (!inventoryGrid) return;
+
+    // Sample car data
+    const carInventory = [
+        {
+            id: 1,
+            make: "Toyota",
+            model: "Camry",
+            year: 2022,
+            price: 25000,
+            mileage: 15000,
+            fuel: "Petrol",
+            transmission: "Automatic",
+            image: "../static/images/cars/toyota-camry.jpg",
+            description: "Well-maintained Toyota Camry with low mileage",
+            features: ["Bluetooth", "Backup Camera", "Cruise Control", "Power Windows"],
+            condition: "Excellent",
+            location: "Mumbai"
+        },
+        {
+            id: 2,
+            make: "Honda",
+            model: "Civic",
+            year: 2021,
+            price: 22000,
+            mileage: 25000,
+            fuel: "Petrol",
+            transmission: "Automatic",
+            image: "../static/images/cars/honda-civic.jpg",
+            description: "Reliable Honda Civic in great condition",
+            features: ["Sunroof", "Leather Seats", "Navigation", "Bluetooth"],
+            condition: "Very Good",
+            location: "Delhi"
+        },
+        {
+            id: 3,
+            make: "BMW",
+            model: "3 Series",
+            year: 2020,
+            price: 35000,
+            mileage: 30000,
+            fuel: "Diesel",
+            transmission: "Automatic",
+            image: "../static/images/cars/bmw-3series.jpg",
+            description: "Luxury BMW 3 Series with premium features",
+            features: ["Heated Seats", "Premium Sound", "Parking Sensors", "LED Lights"],
+            condition: "Excellent",
+            location: "Bangalore"
+        },
+        {
+            id: 4,
+            make: "Mercedes",
+            model: "C-Class",
+            year: 2019,
+            price: 32000,
+            mileage: 35000,
+            fuel: "Diesel",
+            transmission: "Automatic",
+            image: "../static/images/cars/mercedes-cclass.jpg",
+            description: "Elegant Mercedes C-Class with luxury features",
+            features: ["Panoramic Sunroof", "Memory Seats", "Keyless Entry", "Premium Audio"],
+            condition: "Very Good",
+            location: "Hyderabad"
+        },
+        {
+            id: 5,
+            make: "Audi",
+            model: "A4",
+            year: 2021,
+            price: 38000,
+            mileage: 20000,
+            fuel: "Petrol",
+            transmission: "Automatic",
+            image: "../static/images/cars/audi-a4.jpg",
+            description: "Sophisticated Audi A4 with advanced technology",
+            features: ["Virtual Cockpit", "Quattro AWD", "Wireless Charging", "Matrix LED"],
+            condition: "Excellent",
+            location: "Pune"
+        },
+        {
+            id: 6,
+            make: "Ford",
+            model: "Mustang",
+            year: 2018,
+            price: 45000,
+            mileage: 40000,
+            fuel: "Petrol",
+            transmission: "Manual",
+            image: "../static/images/cars/ford-mustang.jpg",
+            description: "Iconic Ford Mustang for the driving enthusiast",
+            features: ["Sports Package", "Performance Brakes", "Recaro Seats", "Track Mode"],
+            condition: "Very Good",
+            location: "Chennai"
+        }
+    ];
+
+    // Update car count
+    if (carCountElement) {
+        carCountElement.textContent = carInventory.length;
+    }
+
+    // Display cars
+    displayCars(carInventory);
+}
+
+// Display cars in grid
+function displayCars(cars) {
+    const inventoryGrid = document.getElementById('inventoryGrid');
+    if (!inventoryGrid) return;
+
+    inventoryGrid.innerHTML = '';
+
+    cars.forEach(car => {
+        const carCard = createCarCard(car);
+        inventoryGrid.appendChild(carCard);
+    });
+}
+
+// Create car card
+function createCarCard(car) {
+    const card = document.createElement('div');
+    card.className = 'car-card';
+    card.innerHTML = `
+        <div class="car-image">
+            <img src="${car.image}" alt="${car.year} ${car.make} ${car.model}" loading="lazy" onerror="this.src='../static/images/cars/default-car.jpg'">
+            <div class="car-badge">${car.condition}</div>
+            <button class="save-car" onclick="toggleSaveCar(${car.id})" title="Save this car">
+                <i class="far fa-heart"></i>
+            </button>
+        </div>
+        <div class="car-details">
+            <h3>${car.year} ${car.make} ${car.model}</h3>
+            <p class="car-price">${formatCurrency(car.price)}</p>
+            <div class="car-specs">
+                <span><i class="fas fa-tachometer-alt"></i> ${car.mileage.toLocaleString()} km</span>
+                <span><i class="fas fa-gas-pump"></i> ${car.fuel}</span>
+                <span><i class="fas fa-cog"></i> ${car.transmission}</span>
+            </div>
+            <p class="car-description">${car.description}</p>
+            <div class="car-features">
+                ${car.features.slice(0, 3).map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+            </div>
+            <div class="car-location">
+                <i class="fas fa-map-marker-alt"></i> ${car.location}
+            </div>
+            <div class="car-actions">
+                <button class="btn btn-primary btn-small" onclick="inquireCar(${car.id})">
+                    <i class="fas fa-phone"></i> Inquire
+                </button>
+                <button class="btn btn-outline btn-small" onclick="viewCarDetails(${car.id})">
+                    <i class="fas fa-eye"></i> View Details
+                </button>
+            </div>
+        </div>
+    `;
+    return card;
+}
+
+// Format currency
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(amount);
+}
+
+// Initialize inventory search
+function initializeInventorySearch() {
+    const searchForm = document.getElementById('searchForm');
+    const clearFiltersBtn = document.getElementById('clearFilters');
+    
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            filterCars();
+        });
+    }
+    
+    if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', clearAllFilters);
+    }
+    
+    // Initialize make/model dropdown
+    const makeSelect = document.getElementById('make');
+    if (makeSelect) {
+        makeSelect.addEventListener('change', updateModelDropdown);
+    }
+}
+
+// Filter cars based on search criteria
+function filterCars() {
+    const make = document.getElementById('make').value.toLowerCase();
+    const model = document.getElementById('model').value.toLowerCase();
+    const year = document.getElementById('year').value;
+    const price = document.getElementById('price').value;
+    const fuel = document.getElementById('fuel').value.toLowerCase();
+    
+    // Get all cars (in a real app, this would come from data.js)
+    const carInventory = [
+        {
+            id: 1,
+            make: "toyota",
+            model: "camry",
+            year: 2022,
+            price: 25000,
+            mileage: 15000,
+            fuel: "petrol",
+            transmission: "Automatic",
+            condition: "Excellent",
+            location: "Mumbai"
+        },
+        {
+            id: 2,
+            make: "honda",
+            model: "civic",
+            year: 2021,
+            price: 22000,
+            mileage: 25000,
+            fuel: "petrol",
+            transmission: "Automatic",
+            condition: "Very Good",
+            location: "Delhi"
+        },
+        {
+            id: 3,
+            make: "bmw",
+            model: "3 series",
+            year: 2020,
+            price: 35000,
+            mileage: 30000,
+            fuel: "diesel",
+            transmission: "Automatic",
+            condition: "Excellent",
+            location: "Bangalore"
+        }
+    ];
+    
+    const filteredCars = carInventory.filter(car => {
+        return (!make || car.make === make) &&
+               (!model || car.model === model) &&
+               (!year || car.year == year) &&
+               (!price || car.price <= price) &&
+               (!fuel || car.fuel === fuel);
+    });
+    
+    displayCars(filteredCars);
+    
+    // Update car count display
+    const carCountElement = document.getElementById('carCount');
+    if (carCountElement) {
+        carCountElement.textContent = filteredCars.length;
+    }
+}
+
+// Update model dropdown based on selected make
+function updateModelDropdown() {
+    const make = document.getElementById('make').value;
+    const modelSelect = document.getElementById('model');
+    
+    // Clear existing options except first
+    modelSelect.innerHTML = '<option value="">Select Model</option>';
+    
+    if (make) {
+        // Get unique models for the selected make (simplified for demo)
+        const models = {
+            toyota: ["Camry", "Corolla", "RAV4", "Highlander"],
+            honda: ["Civic", "Accord", "CR-V", "Pilot"],
+            bmw: ["3 Series", "5 Series", "X3", "X5"],
+            mercedes: ["C-Class", "E-Class", "GLC", "GLE"],
+            audi: ["A4", "A6", "Q5", "Q7"],
+            ford: ["Mustang", "F-150", "Escape", "Explorer"]
+        };
+        
+        const makeModels = models[make] || [];
+        makeModels.forEach(model => {
+            const option = document.createElement('option');
+            option.value = model.toLowerCase();
+            option.textContent = model;
+            modelSelect.appendChild(option);
+        });
+    }
+}
+
+// Clear all filters
+function clearAllFilters() {
+    const searchForm = document.getElementById('searchForm');
+    if (searchForm) {
+        searchForm.reset();
+    }
+    
+    // Reset and show all cars
+    initializeInventory();
+}
+
+// Initialize inventory controls
+function initializeInventoryControls() {
+    const sortSelect = document.getElementById('sortBy');
+    const viewButtons = document.querySelectorAll('.view-btn');
+    
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function(e) {
+            sortCars(e.target.value);
+        });
+    }
+    
+    viewButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const view = this.dataset.view;
+            setView(view);
+            
+            // Update active state
+            viewButtons.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+}
+
+// Sort cars
+function sortCars(sortBy) {
+    // Get current displayed cars
+    const carCards = document.querySelectorAll('.car-card');
+    const cars = Array.from(carCards).map(card => {
+        const title = card.querySelector('h3').textContent;
+        const priceText = card.querySelector('.car-price').textContent;
+        const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+        const year = parseInt(title.split(' ')[0]);
+        const mileageText = card.querySelector('.car-specs span').textContent;
+        const mileage = parseInt(mileageText.replace(/[^0-9]/g, ''));
+        
+        return { element: card, price, year, mileage };
+    });
+    
+    switch (sortBy) {
+        case 'price-asc':
+            cars.sort((a, b) => a.price - b.price);
+            break;
+        case 'price-desc':
+            cars.sort((a, b) => b.price - a.price);
+            break;
+        case 'year-desc':
+            cars.sort((a, b) => b.year - a.year);
+            break;
+        case 'year-asc':
+            cars.sort((a, b) => a.year - b.year);
+            break;
+        case 'mileage-asc':
+            cars.sort((a, b) => a.mileage - b.mileage);
+            break;
+    }
+    
+    // Reorder DOM elements
+    const inventoryGrid = document.getElementById('inventoryGrid');
+    cars.forEach(car => {
+        inventoryGrid.appendChild(car.element);
+    });
+}
+
+// Set view mode
+function setView(view) {
+    const inventoryGrid = document.getElementById('inventoryGrid');
+    if (view === 'list') {
+        inventoryGrid.classList.add('list-view');
+    } else {
+        inventoryGrid.classList.remove('list-view');
+    }
+}
+
+// Initialize form validation
+function initializeFormValidation() {
+    // Contact form validation
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            const errors = validateContactForm(data);
+            
+            if (Object.keys(errors).length === 0) {
+                submitContactForm(data, this);
+            } else {
+                displayFormErrors(errors, this);
+            }
+        });
+    }
+
+    // Newsletter form validation
+    const newsletterForm = document.getElementById('newsletterForm');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = this.querySelector('input[type="email"]').value;
+            
+            if (!validateEmail(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            submitNewsletterForm(email, this);
+        });
+    }
+}
+
+// Validate contact form
+function validateContactForm(data) {
+    const errors = {};
+    
+    if (!data.name || data.name.trim().length < 2) {
+        errors.name = 'Name must be at least 2 characters';
+    }
+    
+    if (!validateEmail(data.email)) {
+        errors.email = 'Please enter a valid email address';
+    }
+    
+    if (!data.subject) {
+        errors.subject = 'Please select a subject';
+    }
+    
+    if (!data.message || data.message.trim().length < 10) {
+        errors.message = 'Message must be at least 10 characters';
+    }
+    
+    return errors;
+}
+
+// Display form errors
+function displayFormErrors(errors, form) {
+    // Clear existing errors
+    form.querySelectorAll('.error-message').forEach(el => el.remove());
+    form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+    
+    // Display new errors
+    Object.keys(errors).forEach(field => {
+        const input = form.querySelector(`[name="${field}"]`);
+        if (input) {
+            input.classList.add('error');
+            
+            const errorElement = document.createElement('div');
+            errorElement.className = 'error-message';
+            errorElement.textContent = errors[field];
+            input.parentNode.appendChild(errorElement);
+        }
+    });
+}
+
+// Submit contact form
+function submitContactForm(data, form) {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Sending...';
+    submitBtn.disabled = true;
+    
+    // Simulate API call
+    setTimeout(() => {
+        // Success
+        alert('Thank you for your message! We will get back to you within 24 hours.');
+        form.reset();
+        
+        // Save to localStorage
+        localStorage.setItem('contactSubmission', JSON.stringify({
+            ...data,
+            timestamp: new Date().toISOString(),
+            id: Date.now()
+        }));
+        
+        // Reset button
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        
+        // Clear any error messages
+        form.querySelectorAll('.error-message').forEach(el => el.remove());
+        form.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+        
+    }, 2000);
+}
+
+// Submit newsletter form
+function submitNewsletterForm(email, form) {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    
+    submitBtn.textContent = 'Subscribing...';
+    submitBtn.disabled = true;
+    
+    // Simulate API call
+    setTimeout(() => {
+        // Success
+        alert('Thank you for subscribing! You will receive our latest updates and offers.');
+        form.reset();
+        
+        // Save to localStorage
+        localStorage.setItem('newsletterSubscription', JSON.stringify({
+            email: email,
+            timestamp: new Date().toISOString(),
+            id: Date.now()
+        }));
+        
+        // Reset button
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        
+    }, 1500);
+}
+
+// Initialize testimonials
+function initializeTestimonials() {
+    const testimonialsGrid = document.getElementById('testimonialsGrid');
+    if (!testimonialsGrid) return;
+
+    const testimonials = [
+        {
+            name: "Rajesh Kumar",
+            location: "Mumbai",
+            rating: 5,
+            comment: "Excellent service! Found the perfect car for my family. The team was very helpful throughout the process.",
+            avatar: "RK"
+        },
+        {
+            name: "Priya Sharma",
+            location: "Delhi",
+            rating: 5,
+            comment: "Best place to buy used cars. Quality vehicles and transparent pricing. Highly recommended!",
+            avatar: "PS"
+        },
+        {
+            name: "Amit Patel",
+            location: "Bangalore",
+            rating: 4,
+            comment: "Great experience! The car was exactly as described. Professional and trustworthy service.",
+            avatar: "AP"
+        },
+        {
+            name: "Sneha Reddy",
+            location: "Hyderabad",
+            rating: 5,
+            comment: "Outstanding customer service. They helped me find the right car within my budget. Thank you!",
+            avatar: "SR"
+        }
+    ];
+    
+    testimonials.forEach(testimonial => {
+        const testimonialCard = createTestimonialCard(testimonial);
+        testimonialsGrid.appendChild(testimonialCard);
+    });
+}
+
+// Create testimonial card
+function createTestimonialCard(testimonial) {
+    const card = document.createElement('div');
+    card.className = 'testimonial-card';
+    card.innerHTML = `
+        <div class="testimonial-rating">
+            ${createStarRating(testimonial.rating)}
+        </div>
+        <p class="testimonial-text">${testimonial.comment}</p>
+        <div class="testimonial-author">
+            <div class="testimonial-avatar">${testimonial.avatar}</div>
+            <div class="testimonial-info">
+                <h4>${testimonial.name}</h4>
+                <p>${testimonial.location}</p>
+            </div>
+        </div>
+    `;
+    return card;
+}
+
+// Create star rating
+function createStarRating(rating) {
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+            stars += '<i class="fas fa-star"></i>';
+        } else if (i - 0.5 <= rating) {
+            stars += '<i class="fas fa-star-half-alt"></i>';
+        } else {
+            stars += '<i class="far fa-star"></i>';
+        }
+    }
+    return stars;
+}
+
+// Initialize car inquiry functionality
+function initializeCarInquiry() {
+    // Make functions globally available
+    window.inquireCar = function(carId) {
+        const car = getCarById(carId);
+        if (car) {
+            smoothScrollTo(document.getElementById('contact'));
+            
+            const subjectField = document.getElementById('subject');
+            const messageField = document.getElementById('message');
+            
+            if (subjectField) subjectField.value = 'inquiry';
+            if (messageField) {
+                messageField.value = `I'm interested in the ${car.year} ${car.make} ${car.model} priced at ${formatCurrency(car.price)}. Please provide more information and availability.`;
+            }
+        }
+    };
+    
+    window.viewCarDetails = function(carId) {
+        const car = getCarById(carId);
+        if (car) {
+            // Store selected car in localStorage for details page
+            localStorage.setItem('selectedCar', JSON.stringify(car));
+            alert(`Viewing details for ${car.year} ${car.make} ${car.model}. In a full application, this would navigate to a detailed view.`);
+        }
+    };
+
+    window.toggleSaveCar = function(carId) {
+        const car = getCarById(carId);
+        if (car) {
+            let savedCars = JSON.parse(localStorage.getItem('savedCars') || '[]');
+            const carIndex = savedCars.findIndex(c => c.id === carId);
+            
+            if (carIndex === -1) {
+                savedCars.push(car);
+                localStorage.setItem('savedCars', JSON.stringify(savedCars));
+                alert('Car saved to your favorites!');
+            } else {
+                savedCars.splice(carIndex, 1);
+                localStorage.setItem('savedCars', JSON.stringify(savedCars));
+                alert('Car removed from favorites!');
+            }
+            
+            // Update heart icon
+            const heartIcon = event.target.closest('.save-car').querySelector('i');
+            if (heartIcon) {
+                heartIcon.classList.toggle('fas');
+                heartIcon.classList.toggle('far');
+            }
+        }
+    };
+}
+
+// Get car by ID (helper function)
+function getCarById(id) {
+    const carInventory = [
+        {
+            id: 1,
+            make: "Toyota",
+            model: "Camry",
+            year: 2022,
+            price: 25000,
+            mileage: 15000,
+            fuel: "Petrol",
+            transmission: "Automatic",
+            image: "../static/images/cars/toyota-camry.jpg",
+            description: "Well-maintained Toyota Camry with low mileage",
+            features: ["Bluetooth", "Backup Camera", "Cruise Control", "Power Windows"],
+            condition: "Excellent",
+            location: "Mumbai"
+        },
+        {
+            id: 2,
+            make: "Honda",
+            model: "Civic",
+            year: 2021,
+            price: 22000,
+            mileage: 25000,
+            fuel: "Petrol",
+            transmission: "Automatic",
+            image: "../static/images/cars/honda-civic.jpg",
+            description: "Reliable Honda Civic in great condition",
+            features: ["Sunroof", "Leather Seats", "Navigation", "Bluetooth"],
+            condition: "Very Good",
+            location: "Delhi"
+        },
+        {
+            id: 3,
+            make: "BMW",
+            model: "3 Series",
+            year: 2020,
+            price: 35000,
+            mileage: 30000,
+            fuel: "Diesel",
+            transmission: "Automatic",
+            image: "../static/images/cars/bmw-3series.jpg",
+            description: "Luxury BMW 3 Series with premium features",
+            features: ["Heated Seats", "Premium Sound", "Parking Sensors", "LED Lights"],
+            condition: "Excellent",
+            location: "Bangalore"
+        },
+        {
+            id: 4,
+            make: "Mercedes",
+            model: "C-Class",
+            year: 2019,
+            price: 32000,
+            mileage: 35000,
+            fuel: "Diesel",
+            transmission: "Automatic",
+            image: "../static/images/cars/mercedes-cclass.jpg",
+            description: "Elegant Mercedes C-Class with luxury features",
+            features: ["Panoramic Sunroof", "Memory Seats", "Keyless Entry", "Premium Audio"],
+            condition: "Very Good",
+            location: "Hyderabad"
+        },
+        {
+            id: 5,
+            make: "Audi",
+            model: "A4",
+            year: 2021,
+            price: 38000,
+            mileage: 20000,
+            fuel: "Petrol",
+            transmission: "Automatic",
+            image: "../static/images/cars/audi-a4.jpg",
+            description: "Sophisticated Audi A4 with advanced technology",
+            features: ["Virtual Cockpit", "Quattro AWD", "Wireless Charging", "Matrix LED"],
+            condition: "Excellent",
+            location: "Pune"
+        },
+        {
+            id: 6,
+            make: "Ford",
+            model: "Mustang",
+            year: 2018,
+            price: 45000,
+            mileage: 40000,
+            fuel: "Petrol",
+            transmission: "Manual",
+            image: "../static/images/cars/ford-mustang.jpg",
+            description: "Iconic Ford Mustang for the driving enthusiast",
+            features: ["Sports Package", "Performance Brakes", "Recaro Seats", "Track Mode"],
+            condition: "Very Good",
+            location: "Chennai"
+        }
+    ];
+    
+    return carInventory.find(car => car.id === id);
+}
+
+// Initialize error handling
+function initializeErrorHandling() {
+    window.addEventListener('error', (e) => {
+        console.error('JavaScript Error:', e.error);
+        // In production, send to error tracking service
+    });
+    
+    window.addEventListener('unhandledrejection', (e) => {
+        console.error('Unhandled Promise Rejection:', e.reason);
+        // In production, send to error tracking service
+    });
+    
+    // Handle image loading errors
+    document.addEventListener('error', (e) => {
+        if (e.target.tagName === 'IMG') {
+            e.target.src = '../static/images/cars/default-car.jpg';
+        }
+    }, true);
+}
+
+// Initialize performance tracking
+function initializePerformanceTracking() {
+    if ('performance' in window) {
+        window.addEventListener('load', () => {
+            const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+            console.log(`Page load time: ${loadTime}ms`);
+            
+            // Track user interactions
+            trackInteraction('page_load', { loadTime: loadTime });
+        });
+    }
+}
+
+// Track user interactions
+function trackInteraction(action, details = {}) {
+    const interaction = {
+        action: action,
+        details: details,
+        timestamp: new Date().toISOString(),
+        url: window.location.href,
+        userAgent: navigator.userAgent
+    };
+    
+    // Save to localStorage for analysis
+    let interactions = JSON.parse(localStorage.getItem('userInteractions') || '[]');
+    interactions.push(interaction);
+    
+    // Keep only last 100 interactions to prevent storage overflow
+    if (interactions.length > 100) {
+        interactions = interactions.slice(-100);
+    }
+    
+    localStorage.setItem('userInteractions', JSON.stringify(interactions));
+    console.log('User interaction tracked:', interaction);
+}
+
+// Lazy load images
+function lazyLoadImages() {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.src;
+                    img.classList.remove('lazy');
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+
+        images.forEach(img => imageObserver.observe(img));
+    }
+}
+
+// Email validation function
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+// Smooth scroll function (if not already defined)
+function smoothScrollTo(element) {
+    const headerOffset = 80;
+    const elementPosition = element.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+    });
+}
+</script>
+</body>

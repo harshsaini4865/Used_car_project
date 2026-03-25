@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Used Car Price Predictor
 
 A web application that predicts used car prices using machine learning.
@@ -121,3 +122,6 @@ The model is trained on car features including:
 ## License
 
 This project is open source and available under the MIT License.
+=======
+# Used_car_project
+>>>>>>> 55cc7397469addf7461b99fe0e60c5d5e51db9a6
